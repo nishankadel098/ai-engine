@@ -7,7 +7,7 @@ print("--- a ---")
 json_path = 'data/files.json'
 
 if not os.path.exists(json_path):
-    print(f"❌ Error: {json_path} nahi mn.")
+    print(f"❌ Error: {json_path} ny ny ny.")
     exit()
 
 with open(json_path, 'r') as f:
