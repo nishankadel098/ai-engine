@@ -2,30 +2,29 @@ import json
 import os
 from sentence_transformers import SentenceTransformer
 
-print("--- AI Offline Training Started ---")
+print("--- a ---")
 
-# 1. JSON File Load karein
 json_path = 'data/files.json'
 
 if not os.path.exists(json_path):
-    print(f"❌ Error: {json_path} nahi mili! phpMyAdmin se export karke yahan rakhein.")
+    print(f"❌ Error: {json_path} nahi mn.")
     exit()
 
 with open(json_path, 'r') as f:
     rows = json.load(f)
 
-print(f"✅ {len(rows)} rows mil gayi hain. Processing...")
+print(f"✅ {len(rows)}  Processing...")
 
-# 2. AI Model Load
-print("Loading AI Model (Pehli baar hai toh wait karein)...")
+
+print("Loading AI Model (wait)...")
 model = SentenceTransformer('all-MiniLM-L6-v2')
 print("✅ AI Model Loaded!")
 
 knowledge_base = []
 
-# 3. Vectorization logic
+
 for i, row in enumerate(rows):
-    # Check karein ki row mein subject_name hai ya nahi
+    
     subject = row.get('subject_name')
     sem = row.get('semester')
     
@@ -38,9 +37,9 @@ for i, row in enumerate(rows):
             "vector": vector
         })
 
-# 4. Save to Knowledge Base
+
 with open("data/knowledge_base.json", "w") as f:
     json.dump(knowledge_base, f)
 
 print("\n--- ✅ SUCCESS ---")
-print("AI Knowledge Base taiyar hai: data/knowledge_base.json")
+print("AI Knowledge Base : data/knowledge_base.json")
