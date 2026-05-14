@@ -5,9 +5,10 @@ import json
 import torch
 import os
 import random
+import gc
 
-# --- RAM OPTIMIZATION: STEP 1 ---
-# PyTorch ko bahut zyada memory reserve karne se rokne ke liye
+# --- RAM OPTIMIZATION: STEP 1 (System Level) ---
+# PyTorch ko unnecessary memory reserve karne se rokne ke liye
 torch.set_num_threads(1)
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
@@ -16,13 +17,20 @@ app = Flask(__name__)
 # CORS setup
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-print("--- Starting AI Engine (RAM Optimized) ---")
+def memory_cleanup():
+    """Manual garbage collection to free unused RAM"""
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+
+print("--- Starting AI Engine (Extreme RAM Optimized) ---")
 print("Loading AI Brain (all-MiniLM-L6-v2)...")
 
-# --- RAM OPTIMIZATION: STEP 2 ---
+# --- RAM OPTIMIZATION: STEP 2 (Model Level) ---
 # Model ko memory-efficient tarike se load karna
 model = SentenceTransformer('all-MiniLM-L6-v2', device='cpu')
-model.max_seq_length = 128  # Memory usage limit karne ke liye length set ki
+model.max_seq_length = 64  # Input length choti rakhne se RAM bachti hai
+memory_cleanup()
 
 # File Paths
 KB_PATH = os.path.join("data", "knowledge_base.json")
@@ -56,8 +64,8 @@ def ask_ai():
     if not knowledge_base:
         return jsonify({"answer": "Mere paas abhi koi data nahi hai."})
 
-    # AI Vector Matching (Optimized with no_grad to save RAM)
-    with torch.no_grad():
+    # AI Vector Matching (Optimized with inference_mode to save maximum RAM)
+    with torch.inference_mode():
         query_vector = model.encode(user_query, convert_to_tensor=True)
         best_match = None
         highest_score = -1
@@ -69,6 +77,11 @@ def ask_ai():
             if score > highest_score:
                 highest_score = score
                 best_match = item
+        
+        # Cleanup vectors from memory
+        del query_vector
+
+    memory_cleanup()
 
     if highest_score > 0.35:
         return jsonify({
@@ -107,25 +120,32 @@ def generate_questions():
         available_subjects = list(sem_data.keys())
         
         # AI Semantic Matching (Optimized)
-        with torch.no_grad():
+        with torch.inference_mode():
             user_vec = model.encode(subject_input, convert_to_tensor=True)
             sub_vecs = model.encode(available_subjects, convert_to_tensor=True)
             similarities = util.cos_sim(user_vec, sub_vecs)[0]
             best_idx = torch.argmax(similarities).item()
+            
+            # Delete large tensors
+            del user_vec
+            del sub_vecs
 
         if similarities[best_idx] > 0.5:
             matched_subject = available_subjects[best_idx]
             questions_list = sem_data[matched_subject]
             selected_questions = random.sample(questions_list, min(len(questions_list), 10))
             
+            memory_cleanup()
             return jsonify({
                 "subject_detected": matched_subject,
                 "questions": selected_questions
             })
         else:
+            memory_cleanup()
             return jsonify({"error": "Subject match nahi hua. Sahi subject likhein."}), 404
 
     except Exception as e:
+        memory_cleanup()
         return jsonify({"error": str(e)}), 500
 
 @app.route('/', methods=['GET'])
@@ -133,5 +153,6 @@ def home():
     return "AI Server is Running! React se /ask (Chat) ya /generate-questions (Test) use karein."
 
 if __name__ == '__main__':
-    # Memory management: Flask engine ko light rakhne ke liye
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    # Render ke liye port fetch karein
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
