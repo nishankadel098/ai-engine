@@ -1,0 +1,108 @@
+{
+  "CSE": {
+    "6": {
+      "artificial intelligence": [
+        {
+          "question": "Who is known as the Father of Artificial Intelligence?",
+          "options": ["Alan Turing", "John McCarthy", "Charles Babbage", "Elon Musk"],
+          "answer": "John McCarthy"
+        },
+        {
+          "question": "Which of the following is a component of an AI system?",
+          "options": ["Learning", "Reasoning", "Problem Solving", "All of the above"],
+          "answer": "All of the above"
+        },
+        {
+          "question": "In which year the term 'Artificial Intelligence' was coined?",
+          "options": ["1950", "1956", "1960", "1945"],
+          "answer": "1956"
+        },
+        {
+          "question": "Which search algorithm is used to find the shortest path in a graph?",
+          "options": ["BFS", "DFS", "A* Algorithm", "Linear Search"],
+          "answer": "A* Algorithm"
+        },
+        {
+          "question": "What is the full form of LISP, a language used in AI?",
+          "options": ["List Processing", "Logic Interpolation", "Linear Search Programming", "List Program"],
+          "answer": "List Processing"
+        },
+        {
+          "question": "A Turing Test is used to determine what?",
+          "options": ["Hardware speed", "A machine's ability to exhibit intelligent behavior", "Network security", "Disk storage"],
+          "answer": "A machine's ability to exhibit intelligent behavior"
+        },
+        {
+          "question": "Which AI technique is based on the biological structure of the human brain?",
+          "options": ["Expert Systems", "Genetic Algorithms", "Artificial Neural Networks", "Fuzzy Logic"],
+          "answer": "Artificial Neural Networks"
+        },
+        {
+          "question": "What is the goal of 'Supervised Learning'?",
+          "options": ["Find hidden patterns", "Map input to output based on labeled data", "Learn by trial and error", "None of these"],
+          "answer": "Map input to output based on labeled data"
+        },
+        {
+          "question": "Which of the following is NOT a type of AI?",
+          "options": ["Weak AI", "Strong AI", "Reactive Machines", "External AI"],
+          "answer": "External AI"
+        },
+        {
+          "question": "Heuristic search is also known as _____ search.",
+          "options": ["Informed", "Uninformed", "Blind", "Linear"],
+          "answer": "Informed"
+        },
+        {
+          "question": "What is an 'Expert System'?",
+          "options": ["A hardware tool", "A computer program that emulates decision-making of a human expert", "A robot", "A programming language"],
+          "answer": "A computer program that emulates decision-making of a human expert"
+        },
+        {
+          "question": "Which algorithm is commonly used for classification in Machine Learning?",
+          "options": ["Quick Sort", "Decision Trees", "Binary Search", "Dijkstra's"],
+          "answer": "Decision Trees"
+        },
+        {
+          "question": "What does 'NLP' stand for in AI?",
+          "options": ["Natural Language Processing", "Numeric Logic Programming", "Node Level Protocol", "Network Language Process"],
+          "answer": "Natural Language Processing"
+        },
+        {
+          "question": "The 'Minimax' algorithm is commonly used in which field of AI?",
+          "options": ["Game Theory", "Image Processing", "Speech Recognition", "Data Mining"],
+          "answer": "Game Theory"
+        },
+        {
+          "question": "Which of these is a popular framework for Deep Learning?",
+          "options": ["React", "TensorFlow", "Laravel", "Django"],
+          "answer": "TensorFlow"
+        },
+        {
+          "question": "What is 'Fuzzy Logic' primarily used for?",
+          "options": ["Precise calculations", "Handling uncertainty and partial truth", "Database management", "Graphics rendering"],
+          "answer": "Handling uncertainty and partial truth"
+        },
+        {
+          "question": "In AI, what is an 'Agent'?",
+          "options": ["A human user", "Anything that perceives its environment and takes actions", "A storage device", "A virus"],
+          "answer": "Anything that perceives its environment and takes actions"
+        },
+        {
+          "question": "What is 'Backpropagation' used for in Neural Networks?",
+          "options": ["Data cleaning", "Updating weights to minimize error", "Storing data", "Printing results"],
+          "answer": "Updating weights to minimize error"
+        },
+        {
+          "question": "Which AI field deals with mimicking human vision?",
+          "options": ["Speech Recognition", "Computer Vision", "Robotics", "Knowledge Representation"],
+          "answer": "Computer Vision"
+        },
+        {
+          "question": "What is 'Overfitting' in Machine Learning?",
+          "options": ["When model performs well on training data but poorly on unseen data", "When model is too simple", "When data is missing", "When server crashes"],
+          "answer": "When model performs well on training data but poorly on unseen data"
+        }
+      ]
+    }
+  }
+}
